@@ -1,5 +1,5 @@
 ---
-- name: Create Vaultwarden data folder
+- name: Create data folder
   become: false
   ansible.builtin.file:
     path: "{{ vaultwarden_dir }}"
@@ -17,6 +17,6 @@
     volumes:
       - "{{ vaultwarden_dir }}:/data:Z"
     env:
-      SIGNUPS_ALLOWED: "false"
+      SIGNUPS_ALLOWED: "true"
       INVITATIONS_ALLOWED: "false"
       DOMAIN: "https://{{ vaultwarden_domain }}"
