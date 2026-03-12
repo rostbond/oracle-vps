@@ -116,6 +116,11 @@
       - fuse-overlayfs
     state: present
 
+- name: Create containers network in Podman
+  become: false
+  containers.podman.podman_network:
+    name: "{{ proxy_network }}"
+
 - name: Allow user to start processes after the SSH logout (Linger)
   ansible.builtin.command: "loginctl enable-linger {{ ansible_user }}"
   register: common_linger_check
