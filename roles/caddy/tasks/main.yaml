@@ -1,0 +1,31 @@
+---
+- name: Create config folder
+  become: false
+  ansible.builtin.file:
+    path: "{{ caddy_config_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Copy Caddyfile template
+  become: false
+  ansible.builtin.template:
+    src: Caddyfile.j2
+    dest: "{{ caddy_config_dir }}/Caddyfile"
+    mode: "0644"
+
+- name: Start Caddy container
+  become: false
+  containers.podman.podman_container:
+    name: caddy
+    image: docker.io/library/caddy:latest
+    network: "{{ proxy_network }}"
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - "{{ caddy_config_dir }}/Caddyfile:/etc/caddy/Caddyfile:Z"
+      - "caddy_data:/data"
+      - "caddy_config:/config"

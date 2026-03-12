@@ -1,0 +1,9 @@
+---
+- name: Oracle VPS setup
+  hosts: oracle_vps
+  become: true
+  roles:
+    - common
+    - fail2ban
+    - podman
+    - caddy

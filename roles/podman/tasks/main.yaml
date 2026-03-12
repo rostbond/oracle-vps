@@ -1,0 +1,27 @@
+- name: Create containers network
+  become: false
+  containers.podman.podman_network:
+    name: "{{ proxy_network }}"
+
+- name: Setup Redis for RSSHub
+  become: false
+  containers.podman.podman_container:
+    name: rsshub-db
+    image: docker.io/library/redis:alpine
+    network: "{{ proxy_network }}"
+    state: started
+    restart_policy: always
+
+- name: Setup RSSHub
+  become: false
+  containers.podman.podman_container:
+    name: rsshub-app
+    image: docker.io/diygod/rsshub:latest
+    network: "{{ proxy_network }}"
+    state: started
+    env:
+      NODE_ENV: production
+      CACHE_TYPE: redis
+      REDIS_URL: "redis://rsshub-db:6379/"
+      ACCESS_KEY: "{{ vault_rsshub_access_key }}"
+      TWITTER_AUTH_TOKEN: "{{ vault_rsshub_twitter_auth_token }}"

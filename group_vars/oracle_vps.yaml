@@ -1,0 +1,3 @@
+rsshub_domain: "feed.skyfall.im"
+caddy_config_dir: "/home/{{ ansible_user }}/caddy_config"
+proxy_network: "web_network"
