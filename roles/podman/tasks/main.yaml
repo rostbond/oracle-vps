@@ -20,6 +20,7 @@
     network: "{{ proxy_network }}"
     state: started
     env:
+      TZ: Europe/Madrid
       NODE_ENV: production
       CACHE_TYPE: redis
       REDIS_URL: "redis://rsshub-db:6379/"
