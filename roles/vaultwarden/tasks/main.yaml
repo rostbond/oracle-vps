@@ -17,6 +17,6 @@
     volumes:
       - "{{ vaultwarden_dir }}:/data:Z"
     env:
-      SIGNUPS_ALLOWED: "true"
+      SIGNUPS_ALLOWED: "false"
       INVITATIONS_ALLOWED: "false"
       DOMAIN: "https://{{ vaultwarden_domain }}"
