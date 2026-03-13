@@ -1,10 +1,12 @@
 ---
 - name: Create data folder
-  become: false
+  become: true
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: '0755'
+    owner: ubuntu
+    group: ubuntu
   loop:
     - "{{ vaultwarden_backup_dir }}"
     - "{{ vaultwarden_backup_dir }}/backups"
