@@ -29,3 +29,7 @@
       - "{{ caddy_config_dir }}/Caddyfile:/etc/caddy/Caddyfile:Z"
       - "caddy_data:/data"
       - "caddy_config:/config"
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true

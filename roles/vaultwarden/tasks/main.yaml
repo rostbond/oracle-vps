@@ -20,3 +20,7 @@
       SIGNUPS_ALLOWED: "false"
       INVITATIONS_ALLOWED: "false"
       DOMAIN: "https://{{ vaultwarden_domain }}"
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true

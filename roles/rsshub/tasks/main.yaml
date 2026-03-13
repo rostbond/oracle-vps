@@ -22,3 +22,7 @@
       REDIS_URL: "redis://rsshub-db:6379/"
       ACCESS_KEY: "{{ vault_rsshub_access_key }}"
       TWITTER_AUTH_TOKEN: "{{ vault_rsshub_twitter_auth_token }}"
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true

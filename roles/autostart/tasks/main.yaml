@@ -1,0 +1,13 @@
+---
+- name: Enable containers autostart via systemd
+  become: false
+  ansible.builtin.systemd:
+    name: "container-{{ item }}"
+    scope: user
+    enabled: true
+    state: started
+    daemon_reload: true
+  loop:
+    - vaultwarden
+    - rsshub-app
+    - caddy
