@@ -6,6 +6,7 @@
     state: stopped
   loop:
     - vaultwarden
+    - vaultwarden-backup
     - rsshub-app
     - caddy
 
@@ -24,5 +25,6 @@
     state: started
   loop:
     - vaultwarden
+    - vaultwarden-backup
     - rsshub-app
     - caddy
