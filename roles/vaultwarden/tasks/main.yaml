@@ -20,6 +20,8 @@
       SIGNUPS_ALLOWED: "false"
       INVITATIONS_ALLOWED: "false"
       DOMAIN: "https://{{ vaultwarden_domain }}"
+      LOG_FILE: "/data/vaultwarden.log"
+      LOG_LEVEL: "warn"
     generate_systemd:
       path: "/home/{{ ansible_user }}/.config/systemd/user/"
       restart_policy: always

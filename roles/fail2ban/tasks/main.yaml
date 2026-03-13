@@ -5,20 +5,22 @@
     state: present
 
 - name: Setup local config (jail.local)
-  ansible.builtin.copy:
+  ansible.builtin.template:
+    src: jail.local.j2
     dest: /etc/fail2ban/jail.local
     mode: "0644"
-    content: |
-      [DEFAULT]
-      bantime  = 1h
-      findtime = 10m
-      maxretry = 5
 
-      [sshd]
-      enabled = true
-      port    = ssh
-      logpath = /var/log/auth.log
-      backend = %(sshd_backend)s
+- name: Copy Vaultwarden filter
+  ansible.builtin.template:
+    src: vaultwarden.local.filter.j2
+    dest: /etc/fail2ban/filter.d/vaultwarden.conf
+    mode: '0644'
+
+- name: Copy Vaultwarden jail configuration
+  ansible.builtin.template:
+    src: vaultwarden.local.jail.j2
+    dest: /etc/fail2ban/jail.d/vaultwarden.local
+    mode: '0644'
 
 - name: Enable and start Fail2ban service
   ansible.builtin.systemd:
