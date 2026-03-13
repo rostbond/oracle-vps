@@ -23,6 +23,8 @@
       - "{{ vaultwarden_backup_dir }}/backups:/backups:Z"
       - "{{ vaultwarden_backup_dir }}/logs:/logs:Z"
     env:
+      UID: 1001
+      GID: 1001
       BACKUP_DIR: "/backups/"
       LOG_DIR: "/logs/"
       LOG_LEVEL: INFO
