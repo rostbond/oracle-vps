@@ -22,6 +22,8 @@
       DOMAIN: "https://{{ vaultwarden_domain }}"
       LOG_FILE: "/data/vaultwarden.log"
       LOG_LEVEL: "warn"
+      LOGIN_RATELIMIT_SECONDS: 300
+      LOGIN_RATELIMIT_MAX_BURST: 10
     generate_systemd:
       path: "/home/{{ ansible_user }}/.config/systemd/user/"
       restart_policy: always
