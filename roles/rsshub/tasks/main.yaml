@@ -14,7 +14,7 @@
     name: rsshub-app
     image: docker.io/diygod/rsshub:latest
     network: "{{ proxy_network }}"
-    state: started
+    state: created
     env:
       TZ: Europe/Madrid
       NODE_ENV: production

@@ -19,7 +19,7 @@
     name: caddy
     image: docker.io/library/caddy:latest
     network: "{{ proxy_network }}"
-    state: started
+    state: created
     restart_policy: always
     ports:
       - "80:80"

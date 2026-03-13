@@ -1,4 +1,20 @@
 ---
+- name: Stop containers before Systemd activation
+  become: false
+  containers.podman.podman_container:
+    name: "{{ item }}"
+    state: stopped
+  loop:
+    - vaultwarden
+    - rsshub-app
+    - caddy
+
+- name: Reload daemon
+  become: false
+  ansible.builtin.systemd:
+    scope: user
+    daemon_reload: true
+
 - name: Enable containers autostart via systemd
   become: false
   ansible.builtin.systemd:
@@ -6,7 +22,6 @@
     scope: user
     enabled: true
     state: started
-    daemon_reload: true
   loop:
     - vaultwarden
     - rsshub-app

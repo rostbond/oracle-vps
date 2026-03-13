@@ -12,7 +12,7 @@
     name: vaultwarden
     image: docker.io/vaultwarden/server:latest
     network: "{{ proxy_network }}"
-    state: started
+    state: created
     restart_policy: always
     volumes:
       - "{{ vaultwarden_dir }}:/data:Z"
