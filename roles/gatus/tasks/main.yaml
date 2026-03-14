@@ -1,0 +1,39 @@
+---
+- name: Create data folders
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: ubuntu
+    group: ubuntu
+  loop:
+    - "{{ gatus_config_dir }}"
+    - "{{ gatus_config_dir }}/config"
+
+- name: Copy gatus config template
+  become: false
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: "{{ gatus_config_dir }}/config/config.yaml"
+    mode: "0644"
+
+- name: Start Gatus container
+  become: false
+  containers.podman.podman_container:
+    name: gatus
+    image: docker.io/twinproduction/gatus:latest
+    network: "{{ proxy_network }}"
+    state: created
+    restart_policy: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - "{{ gatus_config_dir }}/config/config.yaml:/config/config.yaml:Z"
+      - "gatus_data:/data:Z"
+    env:
+      TZ: Europe/Madrid
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true

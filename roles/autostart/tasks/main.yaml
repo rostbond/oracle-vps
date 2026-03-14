@@ -8,6 +8,7 @@
     - vaultwarden
     - vaultwarden-backup
     - rsshub-app
+    - gatus
     - caddy
 
 - name: Reload daemon
@@ -27,4 +28,5 @@
     - vaultwarden
     - vaultwarden-backup
     - rsshub-app
+    - gatus
     - caddy

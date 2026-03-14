@@ -1,0 +1,255 @@
+ui:
+  title: "Skyfall"
+  header: "Skyfall"
+
+storage:
+  type: sqlite
+  path: /data/data.db
+
+alerting:
+  custom:
+    url: "https://api.pushover.net/1/messages.json"
+    method: "POST"
+    headers:
+      Content-Type: "application/json"
+    body: |
+      {
+        "token": "{{ vault_gatus_pushover_token }}",
+        "user": "{{ vault_gatus_pushover_user }}",
+        "title": "Gatus",
+        "message": "[ALERT_TRIGGERED_OR_RESOLVED] [ENDPOINT_NAME]",
+        "priority": 0
+      }
+    placeholders:
+      ALERT_TRIGGERED_OR_RESOLVED:
+        TRIGGERED: "🔴"
+        RESOLVED: "🟢"
+    default-alert:
+      failure-threshold: 2
+      success-threshold: 1
+      send-on-resolved: true
+
+maintenance:
+  start: 04:25
+  duration: 2h
+  timezone: "Europe/Madrid"
+
+endpoints:
+  - name: "backup.legoland.tech"
+    group: "Servarica"
+    url: "https://backup.legoland.tech"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+
+  - name: "bondarch.uk"
+    group: "Digital Ocean"
+    url: "https://bondarch.uk"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+       - type: custom
+
+  - name: "legoland.tech"
+    group: "Digital Ocean"
+    url: "https://legoland.tech"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+       - type: custom
+
+  - name: "skyfall.im"
+    group: "Digital Ocean"
+    url: "https://skyfall.im"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+       - type: custom
+
+  - name: "feed.skyfall.im"
+    group: "Oracle Cloud"
+    url: "https://feed.skyfall.im"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+
+  - name: "vault.skyfall.im"
+    group: "Oracle Cloud"
+    url: "https://vault.skyfall.im"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+
+  - name: "torrents.legoland.tech"
+    group: "Ultra"
+    url: "https://homelab.triton.usbx.me/transmission/web/"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == any(200, 401, 409, 501)"
+    alerts:
+       - type: custom
+
+external-endpoints:
+  - name: "movies.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "tv.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "speedtest.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "plex.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "news.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "indexer.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "id.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "home.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "git.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "docs.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "books.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "adblock.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "photos.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "docker.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "bar.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom
+
+  - name: "proxmox.legoland.tech"
+    group: "Proxmox"
+    token: "{{ vault_gatus_api_token }}"
+    heartbeat:
+      interval: 60s
+    alerts:
+      - type: custom

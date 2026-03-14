@@ -1,7 +1,9 @@
 ---
 rsshub_domain: "feed.skyfall.im"
 vaultwarden_domain: "vault.skyfall.im"
+gatus_domain: "health.skyfall.im"
 caddy_config_dir: "/home/{{ ansible_user }}/caddy_config"
 vaultwarden_dir: "/home/{{ ansible_user }}/vaultwarden_data"
 vaultwarden_backup_dir: "/home/{{ ansible_user }}/vaultwarden_backups"
+gatus_config_dir: "/home/{{ ansible_user }}/gatus_config"
 proxy_network: "web_network"

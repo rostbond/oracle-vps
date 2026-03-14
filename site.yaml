@@ -8,5 +8,6 @@
     - rsshub
     - vaultwarden
     - vaultwarden-backup
+    - gatus
     - caddy
     - autostart
