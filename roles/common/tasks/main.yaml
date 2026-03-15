@@ -13,8 +13,9 @@
       - git
       - vim
       - tree
-      - ncdu  # Анализ места на диске, очень полезно на мелких VPS
+      - ncdu
       - unzip
+      - sqlite3
     state: present
 
 - name: Install unattended-upgrades
@@ -107,7 +108,7 @@
        WELCOME TO ORACLE VPS - MANAGED BY ANSIBLE
       ============================================
       Environment: Production
-      Services: RSSHub, Caddy, Redis
+      Services: RSSHub, Caddy, Redis, Vaultwarden, Gatus
 
 - name: Install packages required for rootless Podman
   ansible.builtin.package:
