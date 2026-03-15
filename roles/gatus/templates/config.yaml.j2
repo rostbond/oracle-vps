@@ -1,6 +1,58 @@
 ui:
   title: "Skyfall"
   header: "Skyfall"
+  custom-css: |
+    .dark #global {
+      --background: 221 21% 16%;
+      --foreground: 52 5% 79%;
+      --card: 221 21% 16%;
+      --card-foreground: 52 5% 79%;
+      --popover: 221 21% 16%;
+      --popover-foreground: 52 5% 79%;
+      --primary: 40 100% 70%;
+      --primary-foreground: 221 21% 16%;
+      --secondary: 211 11% 41%;
+      --secondary-foreground: 52 5% 79%;
+      --muted: 211 11% 41%;
+      --muted-foreground: 52 5% 60%;
+      --accent: 200 100% 73%;
+      --accent-foreground: 221 21% 16%;
+      --destructive: 0 100% 60%;
+      --destructive-foreground: 47 11% 78%;
+      --border: 211 11% 41%;
+      --input: 211 11% 41%;
+      --ring: 200 100% 73%;
+    }
+
+    #global {
+      --background: 0 0% 98%;
+      --foreground: 211 11% 41%;
+      --card: 0 0% 100%;
+      --card-foreground: 211 11% 41%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 211 11% 41%;
+      --primary: 28 100% 63%;
+      --primary-foreground: 0 0% 98%;
+      --secondary: 210 20% 90%;
+      --secondary-foreground: 211 11% 41%;
+      --muted: 210 20% 90%;
+      --muted-foreground: 211 11% 60%;
+      --accent: 200 100% 73%;
+      --accent-foreground: 211 11% 41%;
+      --destructive: 357 79% 69%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 210 20% 85%;
+      --input: 210 20% 85%;
+      --ring: 28 100% 63%;
+    }
+
+    #global header {
+      display: none !important;
+    }
+
+    #global .flex.items-center.justify-between.mb-6 {
+      display: none !important;
+    }
 
 storage:
   type: sqlite
