@@ -8,19 +8,21 @@
     state: created
     restart_policy: always
     volumes:
-      - "{{ vaultwarden_dir }}:/bitwarden/data:ro"
+      - "{{ vaultwarden_dir }}:/data:ro"
     env:
-      RCLONE_REMOTE_NAME: "b2-backup"
-      RCLONE_REMOTE_TYPE: "s3"
-      RCLONE_REMOTE_PROVIDER: "Backblaze"
-      RCLONE_REMOTE_ACCESS_KEY_ID: "{{ vault_b2_key_id }}"
-      RCLONE_REMOTE_SECRET_ACCESS_KEY: "{{ vault_b2_app_key }}"
-      RCLONE_REMOTE_ENDPOINT: "{{ vault_b2_endpoint }}"
-      RCLONE_DESTINATION: "{{ vaultwarden_backup_destination }}"
+      DATA_DIR: "/data"
       CRON_TIME: "0 3 * * *" # Every day at 03:00
-      RETENTION_DAYS: "30"   # Keep backups for the last 30 days
+      BACKUP_KEEP_DAYS: "30"   # Keep backups for the last 30 days
+      RCLONE_REMOTE_TYPE: "s3"
+      RCLONE_CONFIG_S3_PROVIDER: "Other"
+      RCLONE_CONFIG_S3_ACCESS_KEY_ID: "{{ vault_b2_key_id }}"
+      RCLONE_CONFIG_S3_SECRET_ACCESS_KEY: "{{ vault_b2_app_key }}"
+      RCLONE_CONFIG_S3_ENDPOINT: "{{ vault_b2_endpoint }}"
+      RCLONE_CONFIG_S3_REGION: "eu-central-003"
+      RCLONE_REMOTE_PATH: "{{ vaultwarden_backup_destination }}/vaultwarden-backups"
+      ZIP_ENABLE: true
+      ZIP_TYPE: "zip"
       ZIP_PASSWORD: "{{ vault_vaultwarden_backup_zip_password }}" # Additional encryption
-      DB_TYPE: "sqlite"
     generate_systemd:
       path: "/home/{{ ansible_user }}/.config/systemd/user/"
       restart_policy: always
