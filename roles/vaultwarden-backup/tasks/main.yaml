@@ -25,7 +25,7 @@
       - "{{ vaultwarden_dir }}:/bitwarden/data:ro"
       - "{{ vaultwarden_backup_config_dir }}:/config/rclone:ro"
     env:
-      CRON_TIME: "0 3 * * *" # Every day at 03:00
+      CRON: "0 3 * * *" # Every day at 03:00
       BACKUP_KEEP_DAYS: "30"   # Keep backups for the last 30 days
       RCLONE_REMOTE_NAME: "B2"
       RCLONE_REMOTE_DIR: "/skyfall-vaultwarden/"
