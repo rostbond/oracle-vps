@@ -19,7 +19,8 @@
       RCLONE_CONFIG_S3_SECRET_ACCESS_KEY: "{{ vault_b2_app_key }}"
       RCLONE_CONFIG_S3_ENDPOINT: "{{ vault_b2_endpoint }}"
       RCLONE_CONFIG_S3_REGION: "eu-central-003"
-      RCLONE_REMOTE_PATH: "{{ vaultwarden_backup_destination }}/vaultwarden-backups"
+      RCLONE_REMOTE_NAME: "{{ vaultwarden_backup_destination }}"
+      RCLONE_REMOTE_DIR: "vaultwarden-backups"
       ZIP_ENABLE: true
       ZIP_TYPE: "zip"
       ZIP_PASSWORD: "{{ vault_vaultwarden_backup_zip_password }}" # Additional encryption
