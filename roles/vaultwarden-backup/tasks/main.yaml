@@ -1,43 +1,26 @@
 ---
-- name: Create data folder
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: '0755'
-    owner: ubuntu
-    group: ubuntu
-  loop:
-    - "{{ vaultwarden_backup_dir }}"
-    - "{{ vaultwarden_backup_dir }}/backups"
-    - "{{ vaultwarden_backup_dir }}/logs"
-
 - name: Setup Vaultwarden Backup
   become: false
   containers.podman.podman_container:
     name: vaultwarden-backup
-    image: docker.io/bruceforce/vaultwarden-backup:latest
+    image: docker.io/ttionya/vaultwarden-backup:latest
     network: "{{ proxy_network }}"
     state: created
     restart_policy: always
     volumes:
-      - "{{ vaultwarden_dir }}:/data:Z"
-      - "{{ vaultwarden_backup_dir }}/backups:/backups:Z"
-      - "{{ vaultwarden_backup_dir }}/logs:/logs:Z"
+      - "{{ vaultwarden_dir }}:/bitwarden/data:ro"
     env:
-      UID: 1001
-      GID: 1001
-      BACKUP_DIR: "/backups/"
-      LOG_DIR: "/logs/"
-      LOG_LEVEL: INFO
-      CRON_TIME: "0 5 * * *" # EVERY DAY @ 5am
-      DELETE_AFTER: 30
-      TIMESTAMP: true
-      BACKUP_ADD_DATABASE: true
-      BACKUP_ADD_ATTACHMENTS: true
-      BACKUP_ADD_CONFIG_JSON: true
-      BACKUP_ADD_ICON_CACHE: true
-      BACKUP_ADD_RSA_KEY: true
+      RCLONE_REMOTE_NAME: "b2-backup"
+      RCLONE_REMOTE_TYPE: "s3"
+      RCLONE_REMOTE_PROVIDER: "Backblaze"
+      RCLONE_REMOTE_ACCESS_KEY_ID: "{{ vault_b2_key_id }}"
+      RCLONE_REMOTE_SECRET_ACCESS_KEY: "{{ vault_b2_app_key }}"
+      RCLONE_REMOTE_ENDPOINT: "{{ vault_b2_endpoint }}"
+      RCLONE_DESTINATION: "{{ vaultwarden_backup_destination }}"
+      CRON_TIME: "0 3 * * *" # Every day at 03:00
+      RETENTION_DAYS: "30"   # Keep backups for the last 30 days
+      ZIP_PASSWORD: "{{ vault_vaultwarden_backup_zip_password }}" # Additional encryption
+      DB_TYPE: "sqlite"
     generate_systemd:
       path: "/home/{{ ansible_user }}/.config/systemd/user/"
       restart_policy: always
