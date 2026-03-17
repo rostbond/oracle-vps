@@ -9,6 +9,7 @@
     - vaultwarden-backup
     - rsshub-app
     - gatus
+    - letterboxd-app
     - caddy
 
 - name: Reload daemon
@@ -29,4 +30,5 @@
     - vaultwarden-backup
     - rsshub-app
     - gatus
+    - letterboxd-app
     - caddy

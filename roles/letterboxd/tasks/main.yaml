@@ -1,0 +1,23 @@
+---
+- name: Setup Redis for Letterboxd list
+  become: false
+  containers.podman.podman_container:
+    name: letterboxd-db
+    image: docker.io/library/redis:alpine
+    network: "{{ proxy_network }}"
+    state: started
+    restart_policy: always
+
+- name: Setup Letterboxd list
+  become: false
+  containers.podman.podman_container:
+    name: letterboxd-app
+    image: screeny05/letterboxd-list-radarr:latest
+    network: "{{ proxy_network }}"
+    state: created
+    env:
+      REDIS_URL: "redis://letterboxd-db:6379/"
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true
