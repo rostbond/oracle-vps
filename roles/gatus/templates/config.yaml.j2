@@ -258,14 +258,6 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "books.legoland.tech"
-    group: "Proxmox"
-    token: "{{ vault_gatus_api_token }}"
-    heartbeat:
-      interval: 60s
-    alerts:
-      - type: custom
-
   - name: "adblock.legoland.tech"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
@@ -275,14 +267,6 @@ external-endpoints:
       - type: custom
 
   - name: "photos.legoland.tech"
-    group: "Proxmox"
-    token: "{{ vault_gatus_api_token }}"
-    heartbeat:
-      interval: 60s
-    alerts:
-      - type: custom
-
-  - name: "docker.legoland.tech"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
