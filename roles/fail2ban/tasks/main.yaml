@@ -10,18 +10,6 @@
     dest: /etc/fail2ban/jail.local
     mode: "0644"
 
-- name: Copy Vaultwarden filter
-  ansible.builtin.template:
-    src: vaultwarden.local.filter.j2
-    dest: /etc/fail2ban/filter.d/vaultwarden.conf
-    mode: '0644'
-
-- name: Copy Vaultwarden jail configuration
-  ansible.builtin.template:
-    src: vaultwarden.local.jail.j2
-    dest: /etc/fail2ban/jail.d/vaultwarden.local
-    mode: '0644'
-
 - name: Enable and start Fail2ban service
   ansible.builtin.systemd:
     name: fail2ban
