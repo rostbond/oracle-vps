@@ -164,19 +164,6 @@ endpoints:
     alerts:
       - type: custom
 
-  - name: "torrents.legoland.tech"
-    group: "Ultra"
-    url: "https://homelab.triton.usbx.me/transmission/web/"
-    interval: 60s
-    ui:
-      hide-hostname: true
-      hide-url: true
-      hide-conditions: true
-    conditions:
-      - "[STATUS] == any(200, 401, 409, 501)"
-    alerts:
-       - type: custom
-
 external-endpoints:
   - name: "movies.legoland.tech"
     group: "Proxmox"
