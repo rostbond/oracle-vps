@@ -6,8 +6,6 @@
     - common
     - fail2ban
     - rsshub
-    - vaultwarden
-    - vaultwarden-backup
     - gatus
     - letterboxd
     - caddy

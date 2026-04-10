@@ -5,8 +5,6 @@
     name: "{{ item }}"
     state: stopped
   loop:
-    - vaultwarden
-    - vaultwarden-backup
     - rsshub-app
     - gatus
     - letterboxd-app
@@ -26,8 +24,6 @@
     enabled: true
     state: started
   loop:
-    - vaultwarden
-    - vaultwarden-backup
     - rsshub-app
     - gatus
     - letterboxd-app

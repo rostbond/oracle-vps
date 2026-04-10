@@ -109,7 +109,7 @@
        WELCOME TO ORACLE VPS - MANAGED BY ANSIBLE
       ============================================
       Environment: Production
-      Services: RSSHub, Caddy, Redis, Vaultwarden, Gatus
+      Services: RSSHub, Caddy, Redis, Gatus
 
 - name: Install packages required for rootless Podman
   ansible.builtin.package:
