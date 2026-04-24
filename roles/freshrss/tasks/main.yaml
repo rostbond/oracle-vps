@@ -1,0 +1,26 @@
+---
+- name: Start Fresh RSS container
+  become: false
+  containers.podman.podman_container:
+    name: freshrss-app
+    image: docker.io/freshrss/freshrss:latest
+    network: "{{ proxy_network }}"
+    state: created
+    recreate: true
+    labels:
+      io.containers.autoupdate: "registry"
+    ports:
+      - "8088:80"
+    volumes:
+      - "freshrss_data:/var/www/FreshRSS/data:Z"
+      - "freshrss_extensions:/var/www/FreshRSS/extensions:Z"
+    env:
+      TZ: Europe/Madrid
+      CRON_MIN: "3,33"
+      ADMIN_USER: "admin"
+      ADMIN_PASSWORD: "{{ vault_freshrss_admin_password }}"
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true
+      new: true

@@ -5,6 +5,7 @@
     name: "{{ item }}"
     state: stopped
   loop:
+    - freshrss-app
     - rsshub-app
     - gatus
     - letterboxd-app
@@ -24,6 +25,7 @@
     enabled: true
     state: started
   loop:
+    - freshrss-app
     - rsshub-app
     - gatus
     - letterboxd-app

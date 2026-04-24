@@ -5,6 +5,7 @@
   roles:
     - common
     - fail2ban
+    - freshrss
     - rsshub
     - gatus
     - letterboxd

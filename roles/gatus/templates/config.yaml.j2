@@ -151,6 +151,19 @@ endpoints:
     alerts:
       - type: custom
 
+  - name: "news.skyfall.im"
+    group: "Oracle Cloud"
+    url: "https://news.skyfall.im"
+    interval: 60s
+    ui:
+      hide-hostname: true
+      hide-url: true
+      hide-conditions: true
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+
 external-endpoints:
   - name: "movies.legoland.tech"
     group: "Proxmox"

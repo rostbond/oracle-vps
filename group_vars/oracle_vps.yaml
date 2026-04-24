@@ -1,5 +1,6 @@
 ---
 calendars_domain: "calendar.skyfall.im"
+freshrss_domain: "news.skyfall.im"
 rsshub_domain: "feed.skyfall.im"
 gatus_domain: "health.skyfall.im"
 letterboxd_domain: "letterboxd.skyfall.im"

@@ -109,7 +109,7 @@
        WELCOME TO ORACLE VPS - MANAGED BY ANSIBLE
       ============================================
       Environment: Production
-      Services: RSSHub, Caddy, Redis, Gatus
+      Services: FreshRSS, RSSHub, Caddy, Redis, Gatus
 
 - name: Install packages required for rootless Podman
   ansible.builtin.package:
@@ -122,6 +122,17 @@
   become: false
   containers.podman.podman_network:
     name: "{{ proxy_network }}"
+
+- name: Enable Podman auto-update timer
+  ansible.builtin.systemd:
+    name: podman-auto-update.timer
+    state: started
+    enabled: true
+    scope: user
+  become: true
+  become_user: "{{ ansible_user }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/1001"
 
 - name: Allow user to start processes after the SSH logout (Linger)
   ansible.builtin.command: "loginctl enable-linger {{ ansible_user }}"
