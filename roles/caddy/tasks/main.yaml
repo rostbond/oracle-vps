@@ -29,6 +29,7 @@
       - "{{ caddy_config_dir }}/Caddyfile:/etc/caddy/Caddyfile:Z"
       - "caddy_data:/data"
       - "caddy_config:/config"
+      - "/var/www/html/calendars:/var/www/html/calendars:ro"
     generate_systemd:
       path: "/home/{{ ansible_user }}/.config/systemd/user/"
       restart_policy: always

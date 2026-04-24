@@ -1,4 +1,5 @@
 ---
+calendars_domain: "calendar.skyfall.im"
 rsshub_domain: "feed.skyfall.im"
 gatus_domain: "health.skyfall.im"
 letterboxd_domain: "letterboxd.skyfall.im"
