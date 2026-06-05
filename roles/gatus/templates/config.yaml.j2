@@ -98,19 +98,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-
-  - name: "bondarch.uk"
-    group: "Digital Ocean"
-    url: "https://bondarch.uk"
-    interval: 60s
-    ui:
-      hide-hostname: true
-      hide-url: true
-      hide-conditions: true
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-       - type: custom
+      - type: custom
 
   - name: "legoland.tech"
     group: "Digital Ocean"
@@ -190,14 +178,6 @@ external-endpoints:
       - type: custom
 
   - name: "plex.legoland.tech"
-    group: "Proxmox"
-    token: "{{ vault_gatus_api_token }}"
-    heartbeat:
-      interval: 60s
-    alerts:
-      - type: custom
-
-  - name: "news.legoland.tech"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
