@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Withings sync periodically
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=3h
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Sync Withings data to Garmin Connect
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/podman start -a withings-sync

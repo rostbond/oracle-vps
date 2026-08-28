@@ -134,6 +134,14 @@
   environment:
     XDG_RUNTIME_DIR: "/run/user/1001"
 
+- name: Enable withings-sync timer
+  become: false
+  ansible.builtin.systemd:
+    name: withings-sync.timer
+    scope: user
+    enabled: true
+    state: started
+
 - name: Allow user to start processes after the SSH logout (Linger)
   ansible.builtin.command: "loginctl enable-linger {{ ansible_user }}"
   register: common_linger_check
