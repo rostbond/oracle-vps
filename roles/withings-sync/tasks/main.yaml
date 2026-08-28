@@ -1,32 +1,35 @@
 ---
-- name: Create withings-sync folder
+- name: Create withings-sync config folder
   become: false
   ansible.builtin.file:
     path: "{{ withings_sync_config_dir }}"
     state: directory
     mode: "0755"
 
-- name: Create withings-sync config folder
+- name: Set withings-sync config folder ownership
   become: false
-  ansible.builtin.file:
-    path: "{{ withings_sync_config_dir }}/config"
-    state: directory
-    mode: "0700"
+  ansible.builtin.command:
+    cmd: >-
+      podman unshare
+      chown -R 1000:1000
+      {{ withings_sync_config_dir }}
 
-- name: Start withings-sync container
+- name: Create withings-sync container
   become: false
   containers.podman.podman_container:
     name: withings-sync
     image: ghcr.io/jaroslawhartman/withings-sync:latest
     network: "{{ proxy_network }}"
+    interactive: true
+    tty: true
     state: created
-    environment:
+    env:
       TZ: Europe/Madrid
       STACK_PATH: "{{ withings_sync_config_dir }}"
       GARMIN_USERNAME: "{{ vault_withings_sync_garmin_username }}"
       GARMIN_PASSWORD: "{{ vault_withings_sync_garmin_password }}"
     volumes:
-      - "{{ withings_sync_config_dir }}/config:/config:Z"
+      - "{{ withings_sync_config_dir }}:/config:Z"
       - "/etc/localtime:/etc/localtime:ro"
     command:
       - --config-folder
@@ -38,7 +41,7 @@
   become: false
   ansible.builtin.template:
     src: withings-sync.service.j2
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/withings-sync.service"
+    dest: "/home/{{ ansible_user }}/.config/systemd/user/withings-sync.service"
     mode: "0644"
   notify: Restart withings-sync timer
 
@@ -46,7 +49,7 @@
   become: false
   ansible.builtin.template:
     src: withings-sync.timer.j2
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/withings-sync.timer"
+    dest: "/home/{{ ansible_user }}/.config/systemd/user/withings-sync.timer"
     mode: "0644"
   notify: Restart withings-sync timer
 

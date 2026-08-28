@@ -1,0 +1,7 @@
+- name: Restart withings-sync timer
+  become: false
+  ansible.builtin.systemd_service:
+    name: withings-sync.timer
+    state: restarted
+    scope: user
+    daemon_reload: true

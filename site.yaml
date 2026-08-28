@@ -3,11 +3,12 @@
   hosts: oracle_vps
   become: true
   roles:
-    - common
     - fail2ban
+    - withings-sync
     - freshrss
     - rsshub
     - gatus
     - letterboxd
     - caddy
+    - common
     - autostart
