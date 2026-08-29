@@ -87,32 +87,6 @@ maintenance:
   timezone: "Europe/Madrid"
 
 endpoints:
-  - name: "backup.legoland.tech"
-    group: "Servarica"
-    url: "https://backup.legoland.tech"
-    interval: 60s
-    ui:
-      hide-hostname: true
-      hide-url: true
-      hide-conditions: true
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: custom
-
-  - name: "legoland.tech"
-    group: "Digital Ocean"
-    url: "https://legoland.tech"
-    interval: 60s
-    ui:
-      hide-hostname: true
-      hide-url: true
-      hide-conditions: true
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-       - type: custom
-
   - name: "skyfall.im"
     group: "Digital Ocean"
     url: "https://skyfall.im"
@@ -153,7 +127,7 @@ endpoints:
       - type: custom
 
 external-endpoints:
-  - name: "movies.legoland.tech"
+  - name: "movies.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -161,7 +135,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "tv.legoland.tech"
+  - name: "tv.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -169,7 +143,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "speedtest.legoland.tech"
+  - name: "speedtest.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -177,7 +151,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "plex.legoland.tech"
+  - name: "plex.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -185,7 +159,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "indexer.legoland.tech"
+  - name: "indexer.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -193,7 +167,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "id.legoland.tech"
+  - name: "id.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -201,7 +175,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "home.legoland.tech"
+  - name: "home.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -209,7 +183,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "git.legoland.tech"
+  - name: "git.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -217,7 +191,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "docs.legoland.tech"
+  - name: "docs.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -225,7 +199,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "adblock.legoland.tech"
+  - name: "adblock.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -233,7 +207,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "photos.legoland.tech"
+  - name: "photos.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -241,7 +215,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "bar.legoland.tech"
+  - name: "bar.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
@@ -249,7 +223,7 @@ external-endpoints:
     alerts:
       - type: custom
 
-  - name: "proxmox.legoland.tech"
+  - name: "proxmox.skyfall.im"
     group: "Proxmox"
     token: "{{ vault_gatus_api_token }}"
     heartbeat:
