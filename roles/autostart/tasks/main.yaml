@@ -10,6 +10,7 @@
     - gatus
     - letterboxd-app
     - caddy
+    - syncthing
 
 - name: Reload daemon
   become: false
@@ -30,3 +31,4 @@
     - gatus
     - letterboxd-app
     - caddy
+    - syncthing

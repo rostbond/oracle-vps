@@ -88,6 +88,24 @@
     action: insert
     rule_num: "6"
 
+- name: Allow inbound traffic on TCP 22000 port (Syncthing)
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "22000"
+    jump: ACCEPT
+    action: insert
+    rule_num: "6"
+
+- name: Allow inbound traffic on UDP 22000 port (Syncthing QUIC)
+  ansible.builtin.iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: "22000"
+    jump: ACCEPT
+    action: insert
+    rule_num: "6"
+
 - name: Save iptables rules
   ansible.builtin.command: netfilter-persistent save
   # Notify linter that this command doesn't change system state

@@ -1,0 +1,28 @@
+---
+- name: Create data folders
+  become: true
+  ansible.builtin.file:
+    path: "{{ syncthing_data_dir }}"
+    state: directory
+    mode: '0755'
+    owner: ubuntu
+    group: ubuntu
+
+- name: Start Syncthing container
+  become: false
+  containers.podman.podman_container:
+    name: syncthing
+    image: docker.io/syncthing/syncthing:latest
+    network: host
+    state: created
+    restart_policy: always
+    volumes:
+      - "{{ syncthing_data_dir }}:/var/syncthing:Z"
+    env:
+      PUID: "1001"
+      PGID: "1001"
+      STGUIADDRESS: ""
+    generate_systemd:
+      path: "/home/{{ ansible_user }}/.config/systemd/user/"
+      restart_policy: always
+      names: true
